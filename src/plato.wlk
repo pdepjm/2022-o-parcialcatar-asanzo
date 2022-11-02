@@ -1,19 +1,19 @@
 class Plato{
 	const baseCalorias = 100
-	const calificaciones = []
+//	const calificaciones = []
 	const cocinero
 	
 	method cocinero() = cocinero
 	
-	method serCalificado(calificacion) = calificaciones.add(calificacion)
+//	method serCalificado(calificacion) = calificaciones.add(calificacion)
 	
 	method cantidadAzucar()
 	
 	method cantidadCalorias() = 3 * self.cantidadAzucar() + baseCalorias
 	
-	method calificacionTotal() = calificaciones.sum()
+//	method calificacionTotal() = calificaciones.sum()
 	
-	method cantidadCalificaciones() = calificaciones.size()
+//	method cantidadCalificaciones() = calificaciones.size()
 }
 
 class PlatoEntrada inherits Plato{
