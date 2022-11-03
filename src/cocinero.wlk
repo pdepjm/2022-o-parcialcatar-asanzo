@@ -2,53 +2,28 @@ import plato.*
 
 class Cocinero {
 	var especialidad
-//	const platosCocinados = []
 	
-	method calificacionDePlato(plato) = especialidad.catar(plato)
+	// Punto de entrada punto 2.
+	method calificacionPara(plato) = especialidad.catar(plato)
 	
-	method catar(plato){
-		plato.serCalificado(self.calificacionDePlato(plato))
-	}
-	
+	// Punto de entrada punto 3.
 	method cambiarEspecialidad(nuevaEspecialidad){
 		especialidad = nuevaEspecialidad
 	}
 	
-//	method calificacionTotalDePlatos() = platosCocinados.sum({plato => plato.calificacionTotal()})
-	
-//	method cantidadCalificacionesTotal() = platosCocinados.sum({plato => plato.cantidadCalificaciones()})
-	
-//	method experiencia() = self.calificacionTotalDePlatos() * self.cantidadCalificacionesTotal()
-	
-	method cocinar()
-//	{ //efecto y retorno
-//		const plato = self.platoCocinado()
-//		platosCocinados.add(plato)
-//		return plato
-//	}
-	
-//	method platoCocinado()
-	
-//	method noTieneExperiencia() = self.experiencia() == 0
-	
-//	method participar(torneo){
-////		if (self.noTieneExperiencia()) throw new Exception(message = 'Un cocinero sin experiencia no puede participar')
-//		
-//		torneo.sumarParticipante(self)
-//	}
-	
+	// Punto de entrada punto 5.
+	method cocinar() = especialidad.cocinar(self)
 }
 
-class Pastelero{
+class EspecialidadPastelero {
 	const dulzorDeseado
 	
-	method catar(plato) = (5 * plato.cantidadAzucar() / dulzorDeseado).max(10)
+	method catar(plato) = (5 * plato.cantidadAzucar() / dulzorDeseado).min(10)
 	
-	method cocinar() = new PlatoPostre(cocinero= self, colores=['hay que revisar el enunciado'])
-	
+	method cocinar(elCocinero) = new Postre(cocinero = elCocinero, cantColores = dulzorDeseado / 50)
 }
 
-class Chef{
+class EspecialidadChef {
 	const cantidadCaloriasDeseadas
 	
 	method platoCumpleExpectativa(plato) = plato.esBonito() and plato.cantidadCalorias() <= cantidadCaloriasDeseadas
@@ -57,11 +32,11 @@ class Chef{
 	
 	method calificacionSiNoCumpleExpectativa(plato) = 0
 	
-	method cocinar() = new PlatoPrincipal(cocinero= self, esBonito = true, cantidadAzucar=0.randomUpTo(100))
+	method cocinar(elCocinero) = new Principal(cocinero = elCocinero, esBonito = true, cantidadAzucar = cantidadCaloriasDeseadas)
 }
 
-class Souschef inherits Chef{	
-	override method calificacionSiNoCumpleExpectativa(plato) = (plato.cantidadCalorias() / 100).max(6)
+class EspecialidadSouschef inherits EspecialidadChef {	
+	override method calificacionSiNoCumpleExpectativa(plato) = (plato.cantidadCalorias() / 100).min(6)
 	
-	override method cocinar() = new PlatoEntrada(cocinero= self)
+	override method cocinar(elCocinero) = new Entrada(cocinero = elCocinero)
 }

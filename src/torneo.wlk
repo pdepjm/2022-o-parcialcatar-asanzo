@@ -2,22 +2,18 @@ class Torneo{
 	const catadores = []
 	const platosParticipantes = [] 
 	
-	method sumarParticipacion(participante) {
-//		const plato = participante.cocinar()
-//		catadores.forEach({catador => catador.catar(plato)})
-//		platosParticipantes.add(plato)
-		platosParticipantes.add(participante.cocinar())
+	// Punto de entrada punto 6a
+	method sumarParticipacion(cocinero) {
+		platosParticipantes.add(cocinero.cocinar())
 	}
 	
+	// Punto de entrada punto 6b
 	method ganador() {
 		if (platosParticipantes.isEmpty()) 
-			throw new TorneoSinParticipantesException()
+			throw new DomainException(message = "No se puede definir el ganador de un torneo sin participantes")
 		return platosParticipantes.max({plato => self.calificacionTotal(plato)}).cocinero()
 	}
 	
 	method calificacionTotal(plato) = catadores.sum({catador => catador.catar(plato)})
 	
 }
-
-
-class TorneoSinParticipantesException inherits Exception(message = "Torneo sin participantes") {}
