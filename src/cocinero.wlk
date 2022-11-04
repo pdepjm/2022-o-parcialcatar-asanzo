@@ -16,7 +16,7 @@ class Cocinero {
 }
 
 class EspecialidadPastelero {
-	const dulzorDeseado
+	var dulzorDeseado
 	
 	method catar(plato) = (5 * plato.cantidadAzucar() / dulzorDeseado).min(10)
 	
@@ -24,7 +24,7 @@ class EspecialidadPastelero {
 }
 
 class EspecialidadChef {
-	const cantidadCaloriasDeseadas
+	var cantidadCaloriasDeseadas
 	
 	method platoCumpleExpectativa(plato) = plato.esBonito() and plato.cantidadCalorias() <= cantidadCaloriasDeseadas
 	
